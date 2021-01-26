@@ -7,11 +7,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     public Rigidbody2D rb;
-
-    public Text veloText;
-
-
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,12 +16,22 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rb.velocity);
+        //Debug.Log(rb.velocity);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
+        Debug.Log(other);
+        
         if (other.collider.tag == "Tilemap" && rb.velocity.magnitude > 10)
+        {
+            Death();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "hit")
         {
             Death();
         }
